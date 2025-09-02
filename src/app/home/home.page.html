@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Timers list
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button aria-label="Add Timer" fill="solid" color="primary">
+        <ion-icon name="add" aria-hidden="true"></ion-icon>
+        Add Timer
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Blank</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-list>
+    @for (timer of timersData; track timer.id) {
+    <ion-item>
+      <ion-label>
+        <h2>{{ timer.name }}</h2>
+        <p>Exercise Duration: {{ timer.exerciseDuration }} sec</p>
+        <p>Rest Duration: {{ timer.restDuration }} sec</p>
+        <p>Rounds: {{ timer.rounds }}</p>
+      </ion-label>
+      <ion-button fill="clear" size="big" aria-label="Edit Timer">
+        <ion-icon name="pencil" aria-hidden="true"></ion-icon>
+      </ion-button>
+      <ion-button fill="clear" size="big" aria-label="Delete Timer">
+        <ion-icon name="trash" aria-hidden="true"></ion-icon>
+      </ion-button>
+    </ion-item>
+    }
+  </ion-list>
+</ion-content>
