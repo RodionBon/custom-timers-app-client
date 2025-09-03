@@ -10,6 +10,14 @@ export const routes: Routes = [
     loadComponent: () => import('./timer/timer.page').then((m) => m.TimerPage),
   },
   {
+    path: 'signin',
+    loadComponent: () => import('./signin/signin.page').then((m) => m.SigninPage),
+  },
+  {
+    path: 'signup',
+    loadComponent: () => import('./signup/signup.page').then((m) => m.SignupPage),
+  },
+  {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full',
