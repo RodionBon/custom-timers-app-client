@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonItem, IonList, IonLabel, IonIcon, IonButton, IonButtons, IonModal, IonInput } from '@ionic/angular/standalone';
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonItem, IonList, IonIcon, IonButton, IonButtons, IonModal, IonInput, IonGrid, IonRow, IonCol } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { add, pencil, trash, close } from 'ionicons/icons';
 import { Timer } from 'src/types';
@@ -9,7 +9,7 @@ import { Timer } from 'src/types';
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  imports: [RouterLink, IonModal, IonButtons, IonIcon, IonLabel, IonList, IonItem, IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonInput],
+  imports: [IonRow, IonGrid, RouterLink, IonModal, IonButtons, IonIcon, IonList, IonItem, IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonInput, IonCol],
 })
 export class HomePage {
   timersData: Timer[] = [];
