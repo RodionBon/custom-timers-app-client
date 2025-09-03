@@ -15,7 +15,7 @@
 <ion-content>
   <ion-list>
     @for (timer of timersData; track timer.id) {
-    <ion-item>
+    <ion-item routerLink="/timer/{{ timer.id }}">
       <ion-label>
         <h2>{{ timer.name }}</h2>
         <p>Exercise Duration: {{ timer.exerciseDuration }} sec</p>
@@ -54,7 +54,7 @@
           </ion-input>
         </ion-item>
         <ion-item>
-          <ion-input label="Rest duration (in seconds)" labelPlacement="stacked"  type="number">
+          <ion-input label="Rest duration (in seconds)" labelPlacement="stacked" type="number">
           </ion-input>
         </ion-item>
         <ion-item>

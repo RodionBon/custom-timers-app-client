@@ -6,6 +6,10 @@ export const routes: Routes = [
     loadComponent: () => import('./home/home.page').then((m) => m.HomePage),
   },
   {
+    path: 'timer/:id',
+    loadComponent: () => import('./timer/timer.page').then((m) => m.TimerPage),
+  },
+  {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full',
