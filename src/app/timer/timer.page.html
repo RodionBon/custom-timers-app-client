@@ -12,38 +12,32 @@
 </ion-header>
 
 <ion-content>
-  <ion-item>
-    <ion-label>
-      <p>Exercise Duration: {{ timer.exerciseDuration }} sec</p>
-      <p>Rest Duration: {{ timer.restDuration }} sec</p>
-      <p>Rounds: {{ timer.rounds }}</p>
-    </ion-label>
-  </ion-item>
-  <ion-item>
-    <ion-label>
-      @if (currentPhase === "notStarted") {
-      <ion-button (click)="startTimer()">
-        Start
-      </ion-button>
-      } @else if (currentPhase === "exercise") {
-      <p class="timer-text">
-         {{ roundsLeft }} rounds left of {{ timer.rounds }}
-      </p>
-      <p class="timer-text">
-        Exercise phase: {{ timer.exerciseDuration }} sec
-      </p>
-      } @else if (currentPhase === 'rest') {
-      <p class="timer-text">
-         {{ roundsLeft }} rounds left of {{ timer.rounds }}
-      </p>
-      <p class="timer-text">
-        Rest phase: {{ timer.restDuration }} sec
-      </p>
-      } @else if (currentPhase === 'completed') {
-      <p class="timer-text">
-        The workout is finished!
-      </p>
-      }
-    </ion-label>
-  </ion-item>
+  <ion-list>
+    <p class="description-text">Exercise Duration: {{ timer.exerciseDuration }} sec</p>
+    <p class="description-text">Rest Duration: {{ timer.restDuration }} sec</p>
+    <p class="description-text">Rounds: {{ timer.rounds }}</p>
+    @if (currentPhase === "notStarted") {
+    <ion-button (click)="startTimer()" expand="block">
+      Start
+    </ion-button>
+    } @else if (currentPhase === "exercise") {
+    <p class="timer-text">
+      {{ roundsLeft }} rounds left of {{ timer.rounds }}
+    </p>
+    <p class="timer-text">
+      Exercise phase: {{ timer.exerciseDuration }} sec
+    </p>
+    } @else if (currentPhase === 'rest') {
+    <p class="timer-text">
+      {{ roundsLeft }} rounds left of {{ timer.rounds }}
+    </p>
+    <p class="timer-text">
+      Rest phase: {{ timer.restDuration }} sec
+    </p>
+    } @else if (currentPhase === 'completed') {
+    <p class="timer-text">
+      The workout is finished!
+    </p>
+    }
+  </ion-list>
 </ion-content>
