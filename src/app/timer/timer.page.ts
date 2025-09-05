@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IonHeader, IonToolbar, IonTitle, IonContent, IonIcon, IonButton, IonButtons, IonList } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { arrowBack } from 'ionicons/icons';
+import { TimerService } from 'src/services/timer.service';
 import { Timer } from 'src/types';
 
 @Component({
@@ -20,11 +21,18 @@ export class TimerPage {
     this.currentPhase = "exercise";
   }
 
-  navigateBack(){
+  navigateBack() {
     this.router.navigate(['..']);
   }
 
-  constructor(private router: Router) {
+  ngOnInit() {
+    this.activatedRoute.params.subscribe(async params => {
+      const timerId = params['id'];
+      this.timer = await this.timerService.getTimer(timerId);
+    });
+  }
+
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, private timerService: TimerService) {
     addIcons({ arrowBack });
   }
 }

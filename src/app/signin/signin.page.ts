@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IonHeader, IonToolbar, IonTitle, IonContent, IonItem, IonButton, IonInput, IonList } from '@ionic/angular/standalone';
+import { AuthService } from 'src/services/auth.service';
+import { Credentials } from 'src/types';
 
 @Component({
   selector: 'signin-page',
@@ -15,9 +17,16 @@ export class SigninPage {
     password: new FormControl(''),
   })
 
-  onSubmit() {
+  async onSubmit() {
+    try {
+      const responseData = await this.authService.signIn(this.formData.value as Credentials);
+      localStorage.setItem('token', responseData.token);
+      this.router.navigate(['/home']);
+    } catch (error) {
+      console.error('Signin failed:', error);
+    }
   }
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private authService: AuthService) {
   }
 }

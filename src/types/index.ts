@@ -5,3 +5,8 @@ export type Timer = {
     restDuration: number;
     rounds: number;
 }
+
+export type Credentials = {
+    email: string;
+    password: string;
+}

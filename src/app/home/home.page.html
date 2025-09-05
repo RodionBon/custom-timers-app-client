@@ -25,10 +25,10 @@
             <p>Rounds: {{ timer.rounds }}</p>
           </ion-col>
           <ion-col size="4">
-            <ion-button fill="clear" size="big" aria-label="Edit Timer" (click)="openEditTimerModal()">
+            <ion-button fill="clear" size="big" aria-label="Edit Timer" (click)="openEditTimerModal(timer)">
               <ion-icon name="pencil" aria-hidden="true"></ion-icon>
             </ion-button>
-            <ion-button fill="clear" size="big" aria-label="Delete Timer">
+            <ion-button fill="clear" size="big" aria-label="Delete Timer" (click)="deleteTimer(timer.id)">
               <ion-icon name="trash" aria-hidden="true"></ion-icon>
             </ion-button>
           </ion-col>
@@ -52,25 +52,29 @@
       </ion-header>
       <ion-content>
         <ion-list>
-          <ion-item>
-            <ion-input label="Timer name" labelPlacement="stacked" type="text">
-            </ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-input label="Exercise duration (in seconds)" labelPlacement="stacked" type="number">
-            </ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-input label="Rest duration (in seconds)" labelPlacement="stacked" type="number">
-            </ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-input label="Number of rounds" labelPlacement="stacked" type="number">
-            </ion-input>
-          </ion-item>
-          <ion-button expand="block" fill="solid" color="primary">
-            Save
-          </ion-button>
+          <form [formGroup]="formData" (ngSubmit)="onSubmit()">
+            <ion-item>
+              <ion-input label="Timer name" labelPlacement="stacked" type="text" formControlName="name">
+              </ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input label="Exercise duration (in seconds)" labelPlacement="stacked" type="number"
+                formControlName="exerciseDuration">
+              </ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input label="Rest duration (in seconds)" labelPlacement="stacked" type="number"
+                formControlName="restDuration">
+              </ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input label="Number of rounds" labelPlacement="stacked" type="number" formControlName="rounds">
+              </ion-input>
+            </ion-item>
+            <ion-button expand="block" fill="solid" color="primary" type="submit">
+              Save
+            </ion-button>
+          </form>
         </ion-list>
       </ion-content>
     </ng-template>
