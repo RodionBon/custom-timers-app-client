@@ -22,17 +22,17 @@
     </ion-button>
     } @else if (currentPhase === "exercise") {
     <p class="timer-text">
-      {{ roundsLeft }} rounds left of {{ timer.rounds }}
+      Round {{ currentRound }} of {{ timer.rounds }}
     </p>
     <p class="timer-text">
-      Exercise phase: {{ timer.exerciseDuration }} sec
+      Exercise phase: {{ secondsLeft }} sec
     </p>
     } @else if (currentPhase === 'rest') {
     <p class="timer-text">
-      {{ roundsLeft }} rounds left of {{ timer.rounds }}
+      Round {{ currentRound }} of {{ timer.rounds }}
     </p>
     <p class="timer-text">
-      Rest phase: {{ timer.restDuration }} sec
+      Rest phase: {{ secondsLeft }} sec
     </p>
     } @else if (currentPhase === 'completed') {
     <p class="timer-text">
