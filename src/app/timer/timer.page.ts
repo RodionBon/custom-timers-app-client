@@ -50,7 +50,6 @@ export class TimerPage {
   }
 
   stopTimer() {
-    this.currentPhase = "notStarted";
     this.subscription?.unsubscribe();
   }
 
@@ -67,6 +66,7 @@ export class TimerPage {
   }
 
   ngOnDestroy() {
+    this.currentPhase = "notStarted";
     this.stopTimer();
   }
 
