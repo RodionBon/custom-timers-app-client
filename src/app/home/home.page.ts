@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { IonHeader, IonToolbar, IonTitle, IonContent, IonItem, IonList, IonIcon, IonButton, IonButtons, IonModal, IonInput, IonGrid, IonRow, IonCol, IonSpinner } from '@ionic/angular/standalone';
 import { AxiosError } from 'axios';
 import { addIcons } from 'ionicons';
@@ -94,6 +94,11 @@ export class HomePage {
     }
   }
 
+  signOut() {
+    localStorage.removeItem('token');
+    this.router.navigate(['/signin']);
+  }
+
   async ngOnInit() {
     try {
       this.timersData = await this.timerService.getTimers();
@@ -103,7 +108,7 @@ export class HomePage {
     }
   }
 
-  constructor(private timerService: TimerService) {
+  constructor(private router: Router, private timerService: TimerService) {
     addIcons({ pencil, add, trash, close });
   }
 }
