@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonItem, IonButton, IonInput, IonList } from '@ionic/angular/standalone';
+import { Router, RouterLink } from '@angular/router';
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonItem, IonButton, IonInput, IonList, IonLabel } from '@ionic/angular/standalone';
 import { AxiosError } from 'axios';
 import { AuthService } from 'src/services/auth.service';
 import { Credentials, ErrorResponse } from 'src/types';
@@ -10,7 +10,7 @@ import { Credentials, ErrorResponse } from 'src/types';
   selector: 'signin-page',
   templateUrl: 'signin.page.html',
   styleUrls: ['signin.page.scss'],
-  imports: [IonList, IonInput, IonItem, IonHeader, IonToolbar, IonTitle, IonContent, IonButton, ReactiveFormsModule],
+  imports: [IonLabel, IonList, IonInput, IonItem, IonHeader, IonToolbar, IonTitle, IonContent, IonButton, ReactiveFormsModule, RouterLink],
 })
 export class SigninPage {
   formData = new FormGroup({
