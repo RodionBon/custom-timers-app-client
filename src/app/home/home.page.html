@@ -14,6 +14,9 @@
 
 <ion-content>
   <ion-list>
+    @if (timersData.length === 0) {
+    <p class="description-text">No timers available. Please add a timer.</p>
+    }
     @for (timer of timersData; track timer.id) {
     <ion-item>
       <ion-grid>
