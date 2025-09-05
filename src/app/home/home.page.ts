@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonItem, IonList, IonIcon, IonButton, IonButtons, IonModal, IonInput, IonGrid, IonRow, IonCol } from '@ionic/angular/standalone';
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonItem, IonList, IonIcon, IonButton, IonButtons, IonModal, IonInput, IonGrid, IonRow, IonCol, IonSpinner } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { add, pencil, trash, close } from 'ionicons/icons';
 import { TimerService } from 'src/services/timer.service';
@@ -20,7 +20,7 @@ const defaultFormGroup = () => {
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  imports: [IonRow, IonGrid, RouterLink, IonModal, IonButtons, IonIcon, IonList, IonItem, IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonInput, IonCol, ReactiveFormsModule],
+  imports: [IonSpinner, IonRow, IonGrid, RouterLink, IonModal, IonButtons, IonIcon, IonList, IonItem, IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonInput, IonCol, ReactiveFormsModule],
 })
 export class HomePage {
   formData = defaultFormGroup();
@@ -33,12 +33,14 @@ export class HomePage {
   timerTitle: string = "";
   timerToEditId: number = 0;
 
+  isLoading = true;
+
 
   openAddTimerModal() {
     this.timerTitle = "Add timer"
     this.modalType = "create";
     this.formData = defaultFormGroup();
-    
+
     this.addTimerModal.present();
   }
 
@@ -87,6 +89,7 @@ export class HomePage {
   async ngOnInit() {
     try {
       this.timersData = await this.timerService.getTimers();
+      this.isLoading = false;
     } catch (error) {
       console.error('Failed to fetch timers:', error);
     }
