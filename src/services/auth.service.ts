@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import axios from "axios";
+import { AuthResponse } from "src/types";
 
 const URL_BASE = 'http://localhost:3000';
 
@@ -7,7 +8,7 @@ const URL_BASE = 'http://localhost:3000';
     providedIn: 'root',
 })
 export class AuthService {
-    async signIn(credentials: { email: string; password: string }) {
+    async signIn(credentials: { email: string; password: string }): Promise<AuthResponse> {
         try {
             const response = await axios.post(`${URL_BASE}/auth/signin`, credentials);
             return response.data;
@@ -17,7 +18,7 @@ export class AuthService {
         }
     }
 
-    async signUp(credentials: { email: string; password: string }) {
+    async signUp(credentials: { email: string; password: string }): Promise<AuthResponse> {
         try {
             const response = await axios.post(`${URL_BASE}/auth/signup`, credentials);
             return response.data;

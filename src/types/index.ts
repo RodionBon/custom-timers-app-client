@@ -14,3 +14,7 @@ export type Credentials = {
 export type ErrorResponse = {
     error: string;
 }
+
+export type AuthResponse = {
+    token: string;
+}

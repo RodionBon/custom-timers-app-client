@@ -8,7 +8,7 @@ const URL_BASE = 'http://localhost:3000';
     providedIn: 'root',
 })
 export class TimerService {
-    async getTimers() {
+    async getTimers(): Promise<Timer[]> {
         try {
             const response = await axios.get(`${URL_BASE}/timer`, {
                 headers: {
@@ -36,7 +36,7 @@ export class TimerService {
         }
     }
 
-    async createTimer(timerData: Partial<Timer>) {
+    async createTimer(timerData: Partial<Timer>): Promise<Timer> {
         try {
             const response = await axios.post(`${URL_BASE}/timer`, timerData, {
                 headers: {
@@ -50,7 +50,7 @@ export class TimerService {
         }
     }
 
-    async updateTimer(id: number, updatedData: Partial<Timer>) {
+    async updateTimer(id: number, updatedData: Partial<Timer>): Promise<Timer> {
         try {
             const response = await axios.put(`${URL_BASE}/timer/${id}`, updatedData, {
                 headers: {
@@ -64,7 +64,7 @@ export class TimerService {
         }
     }
 
-    async deleteTimer(id: number) {
+    async deleteTimer(id: number): Promise<{ message: string }> {
         try {
             const response = await axios.delete(`${URL_BASE}/timer/${id}`, {
                 headers: {
