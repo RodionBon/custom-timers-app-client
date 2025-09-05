@@ -35,6 +35,7 @@ export class HomePage {
   timerToEditId: number = 0;
 
   isLoading = true;
+  isFormLoading = false;
 
   errorMessage = "";
 
@@ -67,8 +68,8 @@ export class HomePage {
   }
 
   async onSubmit() {
-    console.log('Form Data:', this.formData.value);
     try {
+      this.isFormLoading = true;
       if (this.modalType === "create")
         await this.timerService.createTimer(this.formData.value as Timer);
       else if (this.modalType === "edit")
@@ -79,6 +80,8 @@ export class HomePage {
     } catch (error) {
       this.errorMessage = (error as AxiosError<ErrorResponse>).response?.data?.error || 'Unknown error';
       console.error('Error creating timer:', error);
+    } finally {
+      this.isFormLoading = false;
     }
   }
 
