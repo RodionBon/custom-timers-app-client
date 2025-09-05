@@ -2,10 +2,11 @@ import { Component, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { IonHeader, IonToolbar, IonTitle, IonContent, IonItem, IonList, IonIcon, IonButton, IonButtons, IonModal, IonInput, IonGrid, IonRow, IonCol, IonSpinner } from '@ionic/angular/standalone';
+import { AxiosError } from 'axios';
 import { addIcons } from 'ionicons';
 import { add, pencil, trash, close } from 'ionicons/icons';
 import { TimerService } from 'src/services/timer.service';
-import { Timer } from 'src/types';
+import { ErrorResponse, Timer } from 'src/types';
 
 const defaultFormGroup = () => {
   return new FormGroup({
@@ -35,6 +36,8 @@ export class HomePage {
 
   isLoading = true;
 
+  errorMessage = "";
+
 
   openAddTimerModal() {
     this.timerTitle = "Add timer"
@@ -63,15 +66,6 @@ export class HomePage {
     this.addTimerModal.dismiss();
   }
 
-  async deleteTimer(id: number) {
-    try {
-      await this.timerService.deleteTimer(id);
-      this.timersData = await this.timerService.getTimers();
-    } catch (error) {
-      console.error('Error deleting timer:', error);
-    }
-  }
-
   async onSubmit() {
     console.log('Form Data:', this.formData.value);
     try {
@@ -81,8 +75,19 @@ export class HomePage {
         await this.timerService.updateTimer(this.timerToEditId, this.formData.value as Timer);
       this.timersData = await this.timerService.getTimers();
       this.closeModal();
+      this.errorMessage = "";
     } catch (error) {
+      this.errorMessage = (error as AxiosError<ErrorResponse>).response?.data?.error || 'Unknown error';
       console.error('Error creating timer:', error);
+    }
+  }
+
+  async deleteTimer(id: number) {
+    try {
+      await this.timerService.deleteTimer(id);
+      this.timersData = await this.timerService.getTimers();
+    } catch (error) {
+      console.error('Error deleting timer:', error);
     }
   }
 

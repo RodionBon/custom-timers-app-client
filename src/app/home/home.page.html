@@ -79,6 +79,9 @@
               <ion-input label="Number of rounds" labelPlacement="stacked" type="number" formControlName="rounds">
               </ion-input>
             </ion-item>
+            @if (errorMessage) {
+            <p class="form-error-message">{{ errorMessage }}</p>
+            }
             <ion-button expand="block" fill="solid" color="primary" type="submit">
               Save
             </ion-button>
