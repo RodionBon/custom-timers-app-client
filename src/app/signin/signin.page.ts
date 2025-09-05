@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IonHeader, IonToolbar, IonTitle, IonContent, IonItem, IonButton, IonInput, IonList } from '@ionic/angular/standalone';
+import { AxiosError } from 'axios';
 import { AuthService } from 'src/services/auth.service';
-import { Credentials } from 'src/types';
+import { Credentials, ErrorResponse } from 'src/types';
 
 @Component({
   selector: 'signin-page',
@@ -13,9 +14,10 @@ import { Credentials } from 'src/types';
 })
 export class SigninPage {
   formData = new FormGroup({
-    email: new FormControl(''),
-    password: new FormControl(''),
+    email: new FormControl('', { validators: [Validators.required, Validators.email] }),
+    password: new FormControl('', { validators: [Validators.required] }),
   })
+  errorMessage = "";
 
   async onSubmit() {
     try {
@@ -23,6 +25,7 @@ export class SigninPage {
       localStorage.setItem('token', responseData.token);
       this.router.navigate(['/home']);
     } catch (error) {
+      this.errorMessage = (error as AxiosError<ErrorResponse>).response?.data?.error || 'Unknown error';
       console.error('Signin failed:', error);
     }
   }

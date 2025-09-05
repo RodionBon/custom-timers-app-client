@@ -10,14 +10,41 @@
   <form [formGroup]="formData" (ngSubmit)="onSubmit()">
     <ion-list>
       <ion-item>
-        <ion-input label="Email" labelPlacement="stacked" type="email" formControlName="email">
-        </ion-input>
+        <div>
+          <ion-input label="Email" labelPlacement="stacked" type="email" formControlName="email" />
+          @if (formData.get('email')?.invalid && formData.get('email')?.touched) {
+          <div>
+            <p class="form-error-message">
+              @if (formData.get('email')?.errors?.['required'])
+              {
+              Required field
+              }
+              @if (formData.get('email')?.errors?.['email'])
+              {
+              Wrong email address
+              }
+            </p>
+          </div>
+          }
+        </div>
       </ion-item>
       <ion-item>
-        <ion-input label="Password" labelPlacement="stacked" type="password" formControlName="password">
-        </ion-input>
+        <div>
+          <ion-input label="Password" labelPlacement="stacked" type="password" formControlName="password" />
+          @if (formData.get('password')?.invalid && formData.get('password')?.touched) {
+          <div>
+            @if (formData.get('password')?.errors?.['required'])
+            {
+            <p class="form-error-message">Required field</p>
+            }
+          </div>
+          }
+        </div>
       </ion-item>
-      <ion-button type="submit" expand="block" fill="solid" color="primary">
+      @if (errorMessage) {
+      <p class="form-error-message">{{ errorMessage }}</p>
+      }
+      <ion-button type="submit" expand="block" fill="solid" color="primary" [disabled]="formData.invalid">
         Sign Up
       </ion-button>
     </ion-list>
